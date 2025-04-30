@@ -11,7 +11,7 @@ module SqliteBackup
 
       Backup.create(database: name).tap do
         it.file.attach(io: File.open(backup_path),
-          filename: "#{name}/#{backup.formated_date}.sqlite3")
+          filename: "#{name}/#{it.formated_date}.sqlite3")
         File.delete(backup_path)
       end
 
