@@ -1,6 +1,7 @@
 require "sqlite_backup/version"
 require "sqlite_backup/engine"
 require "sqlite_backup/create"
+require "sqlite_backup/connection"
 
 module SqliteBackup
   mattr_accessor :retention, :storage_service

@@ -23,9 +23,10 @@ module SqliteBackup
     attr_reader :name, :path, :key
 
     def execute_backup
-      ActiveRecord::Base.
-        establish_connection(adapter: "sqlite3", database: path).
-        with_connection { it.execute("VACUUM INTO '#{backup_path}'") }
+      Connection.establish_connection(adapter: "sqlite3", database: path)
+      Connection.connection.execute("VACUUM INTO '#{backup_path}'")
+    ensure
+      Connection.remove_connection
     end
 
     def backup_path
