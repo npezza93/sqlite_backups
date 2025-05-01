@@ -7,7 +7,7 @@ module SqliteBackup
     has_one_attached :file, service: SqliteBackup.storage_service
 
     scope :expired,
-      -> { where(created_at: ..(SqliteBackup.retention || 1.day.ago)) }
+      -> { where(created_at: ..(SqliteBackup.retention || 1.day).ago) }
 
     def formated_date
       created_at.strftime("%Y-%m-%d_%H:%M")

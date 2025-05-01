@@ -1,11 +1,27 @@
 # SqliteBackup
-Short description and motivation.
+A dead simple Rails engine to backup your Sqlite databases utilizing Active
+Storage.
 
 ## Usage
-How to use my plugin.
+
+To backup a database:
+```bash
+$ bin/rails sqlite_backup:backup:[database_name]
+```
+
+Alternatively, you can use a job:
+```ruby
+SqliteBackup::BackupDatabaseJob.perform_later(database_name)
+SqliteBackup::BackupAllJob.perform_later
+```
+
+To restore a database:
+```bash
+$ bin/rails sqlite_backup:restore:[database_name]
+```
 
 ## Installation
-Add this line to your application's Gemfile:
+Add this line to your Gemfile:
 
 ```ruby
 gem "sqlite_backup"
@@ -16,13 +32,18 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
+Then run the installer to copy over the migration and mount a route we use for
+restoring:
 ```bash
-$ gem install sqlite_backup
+$ bin/rails sqlite_backup:install
 ```
 
-## Contributing
-Contribution directions go here.
+These are the available configuration options:
+
+```ruby
+config.backups.storage_service = :backups
+config.backups.retention = 1.day
+```
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
