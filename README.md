@@ -6,7 +6,7 @@ Storage.
 
 To backup a database:
 ```bash
-$ bin/rails backups:backup:[database_name]
+$ bin/rails backup:[database_name]
 ```
 
 Alternatively, you can use a job:
@@ -17,14 +17,14 @@ Backups::BackupAllJob.perform_later
 
 To restore a database:
 ```bash
-$ bin/rails backups:restore:[database_name]
+$ bin/rails restore:[database_name]
 ```
 
 ## Installation
 Add this line to your Gemfile:
 
 ```ruby
-gem "sqlite_backup"
+gem "sqlite_backups"
 ```
 
 And then execute:
