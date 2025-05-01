@@ -5,6 +5,8 @@ require "sqlite_backup/create"
 require "sqlite_backup/restore"
 require "sqlite_backup/connection"
 
+require "zstd-ruby"
+
 module SqliteBackup
   mattr_accessor :retention, :storage_service
 

@@ -10,7 +10,7 @@ module SqliteBackup
       raise StandardError, "File not found" unless service.exist?(key)
 
       File.open(path, "wb") do |file|
-        file.write(service.download(key))
+        file.write(Zstd.decompress(service.download(key)))
       end
     end
 
@@ -19,7 +19,7 @@ module SqliteBackup
     attr_reader :name
 
     def path
-      SqliteBackup.databases(env_name: "development")[name.to_s]
+      SqliteBackup.databases(env_name: Rails.env)[name.to_s]
     end
 
     def service
