@@ -1,5 +1,5 @@
 module Backups
-  class BackupDatabaseJob < ApplicationJob
+  class DatabaseJob < ApplicationJob
     def perform(name)
       Create.new(name).run
     end

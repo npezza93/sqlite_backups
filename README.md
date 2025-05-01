@@ -1,4 +1,5 @@
-# SqliteBackup
+# SqliteBackups
+
 A dead simple Rails engine to backup your Sqlite databases utilizing Active
 Storage.
 
@@ -11,8 +12,8 @@ $ bin/rails backup:[database_name]
 
 Alternatively, you can use a job:
 ```ruby
-Backups::BackupDatabaseJob.perform_later(database_name)
-Backups::BackupAllJob.perform_later
+Backups::DatabaseJob.perform_later(database_name)
+Backups::AllJob.perform_later
 ```
 
 To restore a database:
