@@ -1,4 +1,4 @@
-module SqliteBackup
+module Backups
   class BackupDatabaseJob < ApplicationJob
     def perform(name)
       Create.new(name).run

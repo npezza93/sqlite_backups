@@ -6,18 +6,18 @@ Storage.
 
 To backup a database:
 ```bash
-$ bin/rails sqlite_backup:backup:[database_name]
+$ bin/rails backups:backup:[database_name]
 ```
 
 Alternatively, you can use a job:
 ```ruby
-SqliteBackup::BackupDatabaseJob.perform_later(database_name)
-SqliteBackup::BackupAllJob.perform_later
+Backups::BackupDatabaseJob.perform_later(database_name)
+Backups::BackupAllJob.perform_later
 ```
 
 To restore a database:
 ```bash
-$ bin/rails sqlite_backup:restore:[database_name]
+$ bin/rails backups:restore:[database_name]
 ```
 
 ## Installation
@@ -35,7 +35,7 @@ $ bundle
 Then run the installer to copy over the migration and mount a route we use for
 restoring:
 ```bash
-$ bin/rails sqlite_backup:install
+$ bin/rails backups:install
 ```
 
 These are the available configuration options:

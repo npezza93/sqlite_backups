@@ -1,6 +1,6 @@
 require "tty-prompt"
 
-module SqliteBackup
+module Backups
   class Restore
     def initialize(name)
       @name = name
@@ -19,15 +19,15 @@ module SqliteBackup
     attr_reader :name
 
     def path
-      SqliteBackup.databases(env_name: Rails.env)[name.to_s]
+      Backups.databases(env_name: Rails.env)[name.to_s]
     end
 
     def service
-      ActiveStorage::Blob.services.fetch(SqliteBackup.storage_service)
+      ActiveStorage::Blob.services.fetch(Backups.storage_service)
     end
 
     def token
-      SqliteBackup.generate_token
+      Backups.generate_token
     end
 
     def key

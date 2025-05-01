@@ -1,8 +1,8 @@
-module SqliteBackup
+module Backups
   class Create
     def initialize(name)
       @name = name
-      @path = SqliteBackup.databases[name]
+      @path = Backups.databases[name]
       @key = SecureRandom.hex(16)
     end
 

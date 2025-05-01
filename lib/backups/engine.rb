@@ -1,12 +1,12 @@
-module SqliteBackup
+module Backups
   class Engine < ::Rails::Engine
-    isolate_namespace SqliteBackup
+    isolate_namespace Backups
 
     config.backups = ActiveSupport::OrderedOptions.new
 
-    initializer "sqlite_backup.config" do
+    initializer "backups.config" do
       config.backups.each do |name, value|
-        SqliteBackup.public_send(:"#{name}=", value)
+        Backups.public_send(:"#{name}=", value)
       end
     end
   end

@@ -1,10 +1,10 @@
 $:.push File.expand_path("lib", __dir__)
 
-require_relative "lib/sqlite_backup/version"
+require_relative "lib/backups/version"
 
 Gem::Specification.new do |spec|
-  spec.name        = "sqlite_backup"
-  spec.version     = SqliteBackup::VERSION
+  spec.name        = "sqlite_backups"
+  spec.version     = Backups::VERSION
   spec.authors     = [ "Nick Pezza" ]
   spec.email       = [ "pezza@hey.com" ]
   spec.homepage    = "https://github.com/npezza93/sqlite_backup"

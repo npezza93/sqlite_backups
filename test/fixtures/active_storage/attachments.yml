@@ -1,9 +1,9 @@
 one_file_attachment:
   name: file
-  record: one (SqliteBackup::Backup)
+  record: one (Backups::Backup)
   blob: one_file_blob
 
 two_file_attachment:
   name: file
-  record: two (SqliteBackup::Backup)
+  record: two (Backups::Backup)
   blob: two_file_blob

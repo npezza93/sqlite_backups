@@ -1,4 +1,4 @@
-module SqliteBackup
+module Backups
   class BackupsController < ActionController::Base
     before_action :verify_token
 
@@ -13,7 +13,7 @@ module SqliteBackup
     private
 
     def verify_token
-      raise(ActiveRecord::RecordNotFound) unless SqliteBackup.valid_token?(params[:token])
+      raise(ActiveRecord::RecordNotFound) unless Backups.valid_token?(params[:token])
     end
   end
 end

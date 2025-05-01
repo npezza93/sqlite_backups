@@ -1,13 +1,13 @@
-require "sqlite_backup/version"
-require "sqlite_backup/engine"
-require "sqlite_backup/railtie"
-require "sqlite_backup/create"
-require "sqlite_backup/restore"
-require "sqlite_backup/connection"
+require "backups/version"
+require "backups/engine"
+require "backups/railtie"
+require "backups/create"
+require "backups/restore"
+require "backups/connection"
 
 require "zstd-ruby"
 
-module SqliteBackup
+module Backups
   mattr_accessor :retention, :storage_service
 
   class << self

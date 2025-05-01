@@ -2,4 +2,4 @@ Description:
     Installs migration and route
 
 Example:
-    bin/rails generate sqlite_backup:install
+    bin/rails generate backups:install

@@ -1,4 +1,4 @@
-module SqliteBackup
+module Backups
   class ApplicationRecord < ActiveRecord::Base
     self.abstract_class = true
   end

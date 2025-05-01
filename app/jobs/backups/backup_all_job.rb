@@ -1,7 +1,7 @@
-module SqliteBackup
+module Backups
   class BackupAllJob < ApplicationJob
     def perform
-      SqliteBackup.databases.each_key do |name|
+      Backups.databases.each_key do |name|
         BackupDatabaseJob.perform_later(name)
       end
     end
