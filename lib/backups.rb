@@ -5,8 +5,6 @@ require "backups/create"
 require "backups/restore"
 require "backups/connection"
 
-require "zstd-ruby"
-
 module Backups
   mattr_accessor :retention, :storage_service
 

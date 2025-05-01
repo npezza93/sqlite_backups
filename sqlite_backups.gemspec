@@ -18,5 +18,4 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", ">= 8.0.2"
   spec.add_dependency "tty-prompt"
-  spec.add_dependency "zstd-ruby"
 end

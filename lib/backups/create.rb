@@ -25,13 +25,12 @@ module Backups
     def execute_backup
       Connection.establish_connection(adapter: "sqlite3", database: path)
       Connection.connection.execute("VACUUM INTO '#{backup_path}'")
-      compressed_data = Zstd.compress(data, level: complession_level)
     ensure
       Connection.remove_connection
     end
 
     def compressed_data
-      Zstd.compress(File.read(backup_path), level: 3)
+      ActiveSupport::Gzip.compress(File.read(backup_path))
     end
 
     def backup_path

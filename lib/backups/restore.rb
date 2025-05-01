@@ -10,7 +10,7 @@ module Backups
       raise StandardError, "File not found" unless service.exist?(key)
 
       File.open(path, "wb") do |file|
-        file.write(Zstd.decompress(service.download(key)))
+        file.write(ActiveSupport::Gzip.decompress(service.download(key)))
       end
     end
 
