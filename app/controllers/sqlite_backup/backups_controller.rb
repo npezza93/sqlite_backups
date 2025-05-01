@@ -1,5 +1,5 @@
 module SqliteBackup
-  class BackupsController < ApplicationController
+  class BackupsController < ActionController::Base
     before_action :verify_token
 
     def show
