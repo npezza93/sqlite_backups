@@ -10,7 +10,7 @@ module SqliteBackup
       -> { where(created_at: ..(SqliteBackup.retention || 1.day.ago)) }
 
     def formated_date
-      created_at.strftime("%Y_%m_%d_%H_%M")
+      created_at.strftime("%Y-%m-%d_%H:%M")
     end
   end
 end
