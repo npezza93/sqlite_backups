@@ -17,5 +17,5 @@ Gem::Specification.new do |spec|
                    "Rakefile", "README.md"]
 
   spec.add_dependency "rails", ">= 8.0.2"
-  spec.add_dependency "tty-prompt"
+  spec.add_dependency "cli-ui"
 end

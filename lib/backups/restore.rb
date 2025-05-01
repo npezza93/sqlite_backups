@@ -1,4 +1,4 @@
-require "tty-prompt"
+require "cli/ui"
 
 module Backups
   class Restore
@@ -32,9 +32,13 @@ module Backups
 
     def key
       @key ||=
-        TTY::Prompt.new.select("Pick a backup to restore") do |menu|
-          backups[:files].each { menu.choice it["date"], it["key"] }
+        CLI::UI.ask("Pick a backup to restore", options:).then do |date|
+          backups["files"].find { it["date"].to_s == date }["key"]
         end
+    end
+
+    def options
+      backups[:files].pluck("date").map(&:to_s)
     end
 
     def uri
