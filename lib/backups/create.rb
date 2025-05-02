@@ -2,7 +2,7 @@ module Backups
   class Create
     def initialize(name)
       @name = name
-      @path = Backups.databases[name]
+      @path = Backups.databases[name.to_s]
       @key = SecureRandom.hex(16)
     end
 
