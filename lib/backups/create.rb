@@ -10,12 +10,11 @@ module Backups
       execute_backup
 
       Backup.create(database: name).tap do
-        it.file.attach(io: compressed_data,
-          filename: "#{name}_backup_#{key}.gz")
+        it.file.attach(io: compressed_data, filename: key)
         File.delete(backup_path)
       end
 
-      Backup.where(database: name).expired.destroy_all
+      expire_old_backups
     end
 
     private
@@ -23,10 +22,7 @@ module Backups
     attr_reader :name, :path, :key
 
     def execute_backup
-      Connection.establish_connection(adapter: "sqlite3", database: path)
-      Connection.connection.execute("VACUUM INTO '#{backup_path}'")
-    ensure
-      Connection.remove_connection
+      `sqlite3 #{path} '.backup #{backup_path}'`
     end
 
     def compressed_data
@@ -37,6 +33,13 @@ module Backups
 
     def backup_path
       Rails.root.join("tmp/#{name}_backup_#{key}")
+    end
+
+    def expire_old_backups
+      Backup.where(database: name).expired.each do
+        it.file.purge
+        it.destroy
+      end
     end
   end
 end

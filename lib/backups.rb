@@ -3,7 +3,6 @@ require "backups/engine"
 require "backups/railtie"
 require "backups/create"
 require "backups/restore"
-require "backups/connection"
 
 module Backups
   mattr_accessor :retention, :storage_service
