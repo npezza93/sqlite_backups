@@ -10,8 +10,8 @@ module Backups
       execute_backup
 
       Backup.create(database: name).tap do
-        it.file.attach(io: StringIO.new(compressed_data),
-          filename: key)
+        it.file.attach(io: compressed_data,
+          filename: "#{name}_backup_#{key}.gz")
         File.delete(backup_path)
       end
 
@@ -30,7 +30,9 @@ module Backups
     end
 
     def compressed_data
-      ActiveSupport::Gzip.compress(File.read(backup_path))
+      StringIO.new(ActiveSupport::Gzip.compress(File.read(backup_path))).tap do
+        it.rewind
+      end
     end
 
     def backup_path
