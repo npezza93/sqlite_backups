@@ -12,6 +12,7 @@ module Backups
       Backup.create(database: name).tap do
         it.file.attach(io: compressed_data, filename: key)
         File.delete(backup_path)
+        File.delete("#{backup_path}.gz")
       end
 
       expire_old_backups
@@ -26,9 +27,13 @@ module Backups
     end
 
     def compressed_data
-      StringIO.new(ActiveSupport::Gzip.compress(File.read(backup_path))).tap do
-        it.rewind
+      gzip_path = "#{backup_path}.gz"
+      Zlib::GzipWriter.open(gzip_path) do |gz|
+        File.open(backup_path, "rb") do |f|
+          IO.copy_stream(f, gz)
+        end
       end
+      File.open(gzip_path, "rb")
     end
 
     def backup_path
