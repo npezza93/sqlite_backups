@@ -7,6 +7,7 @@ module Backups
     end
 
     def run
+      raise StandardError, "No backups found" if backups["files"].blank?
       raise StandardError, "File not found" unless service.exist?(key)
 
       File.open(path, "wb") do |file|
@@ -32,8 +33,12 @@ module Backups
 
     def key
       @key ||=
-        CLI::UI.ask("Pick a backup to restore", options:).then do |date|
-          backups["files"].find { it["date"].to_s == date }["key"]
+        if backups["files"].count == 1
+          backups["files"].first["key"]
+        else
+          CLI::UI.ask("Pick a backup to restore", options:).then do |date|
+            backups["files"].find { it["date"].to_s == date }["key"]
+          end
         end
     end
 
