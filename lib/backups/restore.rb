@@ -46,7 +46,7 @@ module Backups
       File.open("#{download_path}.gz", "rb") do |file|
         File.open(download_path, "wb") do |out|
           Zlib::GzipReader.wrap(file) do |gz|
-            out.write(gz.read)
+            gz.each_line { out.write(it) }
           end
         end
       end
