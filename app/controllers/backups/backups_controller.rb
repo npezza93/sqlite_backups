@@ -4,7 +4,7 @@ module Backups
 
     def show
       files = Backup.where(database: params[:name]).map do
-        { date: it.created_at, key: it.file.key }
+        { date: it.created_at, key: it.file.key, size: it.file.byte_size }
       end
 
       render json: { name: params[:name], files: }
