@@ -23,7 +23,21 @@ module Backups
     attr_reader :name, :path, :key
 
     def execute_backup
-      `sqlite3 #{path} '.backup #{backup_path}'`
+      sdb = SQLite3::Database.new(path)
+      ddb = SQLite3::Database.new(backup_path)
+
+      b = SQLite3::Backup.new(ddb, "main", sdb, "main")
+      current_progress = 0
+      begin
+        b.step(1)
+        progress = (((b.pagecount - b.remaining) / b.pagecount.to_f) * 100.0).to_i
+        if progress > current_progress
+          current_progress = progress
+          print "\r#{current_progress}%"
+        end
+      end while b.remaining > 0
+      b.finish
+      puts ""
     end
 
     def compressed_data
