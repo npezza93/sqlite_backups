@@ -1,6 +1,6 @@
-# SqliteBackups
+# SQLiteBackups
 
-A dead simple Rails engine to backup your Sqlite databases utilizing Active
+A dead simple Rails engine to backup your SQLite databases utilizing Active
 Storage.
 
 ## Usage
@@ -45,6 +45,8 @@ These are the available configuration options:
 config.backups.storage_service = :backups
 config.backups.retention = 1.day
 ```
+
+The `storage_service` value points to a defined ActiveStorage service.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
